@@ -1,0 +1,72 @@
+<html>
+<head>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="../dist/skulpt.min.js" type="text/javascript"></script>
+<script src="../dist/skulpt-stdlib.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#run").click(function() {
+    runPython();
+//    draw1();
+  });
+  $("#run2").click(function() {
+    runPython2();
+  });
+});
+/*
+function draw1() {
+  var cv=$("#cv")[0];
+  var ctx=cv.getContext("2d");
+  var img=new Image();
+  img.src="kt.png";
+  img.addEventListener("load", function() {
+    ctx.drawImage(img, 0, 0, 200, 200);
+  });
+}
+*/
+function outf(txt) {
+  console.log(txt);
+}
+function br(x) {
+  if (Sk.builtinFiles==undefined || Sk.builtinFiles["files"][x]==undefined) 
+    throw "File not found: "+x;
+  return Sk.builtinFiles["files"][x];
+}
+function runPython() {
+  var prog=$("#code").val();
+  Sk.configure({output:outf, read:br, retainglobals:true});
+  var prom=Sk.misceval.asyncToPromise(function() {
+    return Sk.importMainWithBody("<stdin>", false, prog, true);
+  });
+  prom.then(function(mod) {
+    console.log('success');
+  }, function(err) {
+    console.log(err.toString());
+  });
+}
+function runPython2() {
+  var prog="print(xyz)";
+  var prom=Sk.misceval.asyncToPromise(function() {
+    return Sk.importMainWithBody("<stdin>", false, prog, true);
+  });
+  prom.then(function(mod) {
+    console.log('success');
+  }, function(err) {
+    console.log(err.toString());
+  });
+}
+</script>
+</head>
+<body>
+<textarea id="code" rows="10" cols="40">
+</textarea>
+<button id="run">Run</button>
+<button id="run2">Run</button>
+<p>
+<canvas id="cv" width="300" height="200">
+</canvas>
+</body>
+</html>
