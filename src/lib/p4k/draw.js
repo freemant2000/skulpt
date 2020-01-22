@@ -137,7 +137,14 @@ var $builtinmodule=function(name) {
       }
       return Sk.builtin.none.none$;
     });
-
+    $loc.drawWithMapping=new Sk.builtin.func(function (self, ctx, sx, sy, sw, sh) {
+      var sx=Sk.ffi.remapToJs(sx);
+      var sy=Sk.ffi.remapToJs(sy);
+      var sw=Sk.ffi.remapToJs(sw);
+      var sh=Sk.ffi.remapToJs(sh);
+      ctx.drawImage(self.img, sx, sy, sw, sh, self.x, self.y, self.w, self.h);
+      return Sk.builtin.none.none$;
+    });
   }, 'Image', []);
   return mod;
 };

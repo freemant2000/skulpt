@@ -35,11 +35,27 @@ import p4khl.knight
 import p4k.draw
 
 
+
+
+from p4k.audio import Audio
+a=Audio("assets/lose.mp3")
+a.play()
+
+
+
 from p4k.draw import CanvasContext
 from p4khl.knight import Knight
 cc=CanvasContext("cv")
 cc.translate(0, 200)
 cc.scale(1, -1)
-k=Knight(0, 0)
-k.draw(cc.get_context())
+cc.move_to(100, 100)
+cc.line_to(164, 164)
+cc.stroke()
+cc.save()
+cc.translate(100, 100+64)
+cc.scale(1, -1)
+img=Image("assets/knight.png", 0, 0)
+img.draw(cc.get_context())
+cc.restore()
+
 
