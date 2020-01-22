@@ -34,3 +34,12 @@ import pkg1.mod2
 import p4khl.knight
 import p4k.draw
 
+
+from p4k.draw import CanvasContext
+from p4khl.knight import Knight
+cc=CanvasContext("cv")
+cc.translate(0, 200)
+cc.scale(1, -1)
+k=Knight(0, 0)
+k.draw(cc.get_context())
+
