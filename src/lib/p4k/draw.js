@@ -95,7 +95,6 @@ var $builtinmodule=function(name) {
   }, 'CanvasContext', []);
   mod.Image=Sk.misceval.buildClass(mod, function($gbl, $loc) {
     $loc.__init__=new Sk.builtin.func(function (self, srcUrl, x, y) {
-      debugger;
       self.x=Sk.ffi.remapToJs(x);
       self.y=Sk.ffi.remapToJs(y);
       self.img=new Image();
