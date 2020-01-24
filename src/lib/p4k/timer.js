@@ -4,7 +4,8 @@ var $builtinmodule=function(name) {
     $loc.__init__=new Sk.builtin.func(function (self, intMs) {
       var intv=Sk.ffi.remapToJs(intMs);
       self.timerId=setInterval(function() {
-      	 Sk.misceval.callsimArray(self["on_timer"], [self]);
+      	 //Sk.misceval.callsimArray(self["on_timer"], [self]);
+         Sk.misceval.applyAsync(undefined, self["on_timer"], undefined, undefined, undefined, [self]);
       }, intv);
       return Sk.builtin.none.none$;
     });
