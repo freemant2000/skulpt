@@ -17,5 +17,21 @@ var $builtinmodule=function(name) {
       return Sk.builtin.none.none$;
     });
   }, 'Timer', []);
+  mod.TimerOnce=Sk.misceval.buildClass(mod, function($gbl, $loc) {
+    $loc.__init__=new Sk.builtin.func(function (self, intMs) {
+      var intv=Sk.ffi.remapToJs(intMs);
+      self.timerId=setTimeout(function() {
+         Sk.misceval.applyAsync(undefined, self["on_timer"], undefined, undefined, undefined, [self]);
+      }, intv);
+      return Sk.builtin.none.none$;
+    });
+    $loc.cancel=new Sk.builtin.func(function (self) {
+      clearTimeout(self.timerId);
+      return Sk.builtin.none.none$;
+    });
+    $loc.on_timer=new Sk.builtin.func(function (self) {
+      return Sk.builtin.none.none$;
+    });
+  }, 'TimerOnce', []);
   return mod;
 };
