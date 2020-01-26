@@ -86,6 +86,10 @@ var $builtinmodule=function(name) {
       self.ctx.scale(Sk.ffi.remapToJs(sx), Sk.ffi.remapToJs(sy));
       return Sk.builtin.none.none$;
     });
+    $loc.set_filter=new Sk.builtin.func(function (self, f) {
+      self.ctx.filter=Sk.ffi.remapToJs(f);
+      return Sk.builtin.none.none$;
+    });
     $loc.reset_transform=new Sk.builtin.func(function (self) {
       self.ctx.resetTransform();
       return Sk.builtin.none.none$;
