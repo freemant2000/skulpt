@@ -34,7 +34,8 @@ var $builtinmodule=function(name) {
                 vs.push(v);
             }
             d.dialog("close");
-            Sk.misceval.applyAsync(undefined, onOkFunc, undefined, undefined, undefined, [Sk.ffi.remapToPy(vs)]);
+            // if the python code throws an error, you may catch it with the promise returned
+            Sk.misceval.applyAsync(undefined, onOkFunc, undefined, undefined, undefined, [Sk.ffi.remapToPy(vs)]); 
         },
         Cancel: function() {
             d.dialog("close");
