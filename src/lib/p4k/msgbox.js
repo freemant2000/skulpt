@@ -16,5 +16,33 @@ var $builtinmodule=function(name) {
     });
     return Sk.builtin.none.none$;
   });
+  mod.show_input_dlg=new Sk.builtin.func(function (title, labels, onOkFunc, onCancelFunc) {
+    title=Sk.ffi.remapToJs(title);
+    labels=Sk.ffi.remapToJs(labels);
+    var html="";
+    for (var i=0; i < labels.length; i++) {
+        html+="<tr><td>"+labels[i]+"</td><td><input type='text' id='input_box_"+i.toString()+"'></td></tr>";
+    }
+    var html="<div><table><tbody>"+html+"</tbody></table></div>";
+    var d=$(html).dialog({
+      title: title,
+      buttons: {
+        OK: function() {
+            var vs=[];
+            for (var i=0; i < labels.length; i++) {
+                var v=d.find("#input_box_"+i.toString()).val();
+                vs.push(v);
+            }
+            d.dialog("close");
+            Sk.misceval.applyAsync(undefined, onOkFunc, undefined, undefined, undefined, [Sk.ffi.remapToPy(vs)]);
+        },
+        Cancel: function() {
+            d.dialog("close");
+            Sk.misceval.applyAsync(undefined, onCancelFunc, undefined, undefined, undefined, []);
+        }
+      }
+    });
+    return Sk.builtin.none.none$;
+  });
   return mod;
 };
