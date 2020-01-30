@@ -5,5 +5,9 @@ var $builtinmodule=function(name) {
     var v=$(s).val();
     return Sk.ffi.remapToPy(v);
   });
+  mod.get_cur_url=new Sk.builtin.func(function () {
+    var l=Sk.ffi.remapToPy(window.location.href);
+    return l;
+  });
   return mod;
 };
